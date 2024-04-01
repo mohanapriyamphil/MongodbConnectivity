@@ -5,6 +5,10 @@ const connectToMongoDB = require("./database.config");
 const Student = require("./routes/student");
 const Mentor = require("./routes/mentor");
 
+//configuring environment variables
+require("dotenv").config();
+// console.log(process.env)
+
 //middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,7 +22,14 @@ app.use("/api", Mentor);
 connectToMongoDB();
 
 //connect to server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, function () {
-  console.log(`Server listening on port ${PORT}`);
+const hostname =
+  process.env.NODE_ENVIRONMENT === "development"
+    ? process.env.DEV_SERVER_HOSTNAME
+    : process.env.PROD_SERVER_HOSTNAME;
+const port =
+  process.env.NODE_ENVIRONMENT === "development"
+    ? process.env.DEV_SERVER_PORT
+    : process.env.PROD_SERVER_PORT;
+app.listen(port, function () {
+  console.log(`Server listening at http://${hostname}:${port}`);
 });
