@@ -23,13 +23,13 @@ connectToMongoDB();
 
 //connect to server
 const hostname =
-  process.env.NODE_ENVIRONMENT === "development"
-    ? process.env.DEV_SERVER_HOSTNAME
+  process.env.NODE_ENV === "development"
+    ? "localhost"
     : process.env.PROD_SERVER_HOSTNAME;
 const port =
-  process.env.NODE_ENVIRONMENT === "development"
-    ? process.env.DEV_SERVER_PORT
-    : process.env.PROD_SERVER_PORT;
+  process.env.NODE_ENV === "development"
+    ? 3000
+    : process.env.PORT;
 app.listen(port, function () {
   console.log(`Server listening at http://${hostname}:${port}`);
 });
