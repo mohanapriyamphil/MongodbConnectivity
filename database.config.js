@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 function connectToMongoDB() {
   mongoose
-    .connect("mongodb://127.0.0.1:27017/Class")
+    .connect("mongodb://0.0.0.0:27017/Class")
     .then(() => {
       console.log("Connected to MongoDB");
     })
